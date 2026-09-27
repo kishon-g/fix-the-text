@@ -39,7 +39,9 @@ export default function RootLayout({
       )}
     >
       <TooltipProvider>
-        <body className="min-h-full flex flex-col bg-background text-foreground">{children}</body>
+        <body className="min-h-screen flex flex-col bg-background text-foreground">
+          {children}
+        </body>
       </TooltipProvider>
     </html>
   )
