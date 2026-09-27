@@ -14,7 +14,7 @@ import { ListNode, ListItemNode } from "@lexical/list"
 import { CodeNode } from "@lexical/code-core"
 import { $getRoot, $createParagraphNode, LexicalEditor } from "lexical"
 
-import { EditorToolbar } from "./EditorToolbar"
+import { WhatsAppToolbar } from "./application/WhatsAppToolbar"
 import { convertEditorStateToWhatsApp } from "@/lib/whatsappConverter"
 
 const editorTheme = {
@@ -90,7 +90,7 @@ export function Editor({ onChangeText, onRegisterClear }: EditorProps) {
   return (
     <div className="flex flex-col h-full rounded-xl border border-border bg-card shadow-xs transition-shadow focus-within:ring-2 focus-within:ring-ring/40">
       <LexicalComposer initialConfig={initialConfig}>
-        <EditorToolbar />
+        <WhatsAppToolbar />
         <div className="relative flex-1 p-4 min-h-[280px] sm:min-h-[340px]">
           <RichTextPlugin
             contentEditable={

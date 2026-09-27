@@ -16,7 +16,7 @@ import {
   ClearAllButton,
 } from "@/components/toolbar";
 
-export function EditorToolbar() {
+export function WhatsAppToolbar() {
   return (
     <ToolbarProvider>
       <TooltipProvider delay={200}>
