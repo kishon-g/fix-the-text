@@ -101,7 +101,7 @@ export function Editor({ onChangeText, onRegisterClear }: EditorProps) {
             }
             placeholder={
               <div className="pointer-events-none absolute top-4 left-4 select-none text-sm text-muted-foreground/60">
-                Write or paste your message here... Use toolbar or keyboard shortcuts to format.
+                Write or paste your message here...
               </div>
             }
             ErrorBoundary={LexicalErrorBoundary}
