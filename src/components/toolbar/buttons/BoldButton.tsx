@@ -8,14 +8,14 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip"
-import { useToolbar } from "@/context/ToolbarContext"
+import { useToolbar } from "../../../context/ToolbarContext"
 
 export function BoldButton() {
   const { isBold, formatBold } = useToolbar()
 
   return (
     <Tooltip>
-      <TooltipTrigger>
+      <TooltipTrigger asChild>
         <Button
           type="button"
           variant={isBold ? "secondary" : "ghost"}
