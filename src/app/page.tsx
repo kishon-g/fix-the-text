@@ -50,8 +50,7 @@ export default function Home() {
     <main className="min-h-screen flex flex-col container mx-auto max-w-[95%] px-2 lg:px-0 py-2 gap-6">
       <Header />
 
-      {/* Main Grid Layout: Editor on left, Preview on right for desktop */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-stretch flex-1">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 items-stretch flex-1">
         <div className="flex flex-col h-full min-h-[380px] sm:min-h-[440px]">
           <Editor
             onChangeText={handleTextChange}
