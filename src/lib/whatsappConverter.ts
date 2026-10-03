@@ -161,7 +161,7 @@ export function $convertToWhatsAppState(): string {
     }
   }
 
-  return blockResults.join("\n\n")
+  return blockResults.join("\n")
 }
 
 export function convertEditorStateToWhatsApp(editor: LexicalEditor): string {
