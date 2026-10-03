@@ -20,7 +20,7 @@ export function WhatsAppToolbar() {
   return (
     <ToolbarProvider>
       <TooltipProvider delay={200}>
-        <div className="flex w-full flex-wrap items-center justify-between gap-2 rounded-t-xl border-b border-border/80 bg-muted/30 p-2 text-foreground">
+        <div className="flex w-full flex-wrap items-center justify-between gap-2 rounded-t-xl border-b border-border/80 bg-muted/30 p-2 text-foreground shrink-0">
           <div className="flex flex-wrap items-center gap-1">
             <BoldButton />
             <ItalicButton />

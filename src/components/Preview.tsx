@@ -3,7 +3,7 @@
 import React, { useState } from "react"
 import { CheckCheck, Eye, FileCode2 } from "lucide-react"
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent } from "@/components/ui/card"
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Badge } from "@/components/ui/badge"
 
@@ -73,18 +73,19 @@ function renderFormattedMessage(whatsappText: string) {
     <div className="space-y-1 text-[13.5px] leading-snug font-sans text-zinc-900 dark:text-zinc-100 break-words whitespace-pre-wrap">
       {lines.map((line, idx) => {
         if (line.startsWith("> ")) {
+          const quoteContent = line.slice(2)
           return (
             <div
               key={idx}
-              className="my-1.5 border-l-[3px] border-emerald-600/80 dark:border-emerald-400/80 bg-emerald-500/10 dark:bg-emerald-500/20 px-2.5 py-1 rounded-r-md text-xs"
+              className="my-1.5 border-l-[3px] border-emerald-600/80 dark:border-emerald-400/80 bg-emerald-500/10 dark:bg-emerald-500/20 px-2.5 py-1 rounded-r-md text-xs min-h-[1.375em]"
             >
-              {parseWhatsAppInline(line.slice(2))}
+              {quoteContent.trim().length === 0 ? <br /> : parseWhatsAppInline(quoteContent)}
             </div>
           )
         }
         return (
-          <div key={idx} className="min-h-[1.2rem]">
-            {parseWhatsAppInline(line)}
+          <div key={idx} className="min-h-[1.375em]">
+            {line.trim().length === 0 ? <br /> : parseWhatsAppInline(line)}
           </div>
         )
       })}
@@ -101,34 +102,25 @@ export function Preview({ whatsappText }: PreviewProps) {
   })
 
   return (
-    <Card className="flex flex-col h-full border border-border shadow-xs overflow-hidden">
-      <CardHeader className="flex flex-row items-center justify-between pb-3 pt-4 px-4 border-b border-border/60 bg-muted/20">
-        <div className="flex items-center gap-2">
-          <CardTitle className="text-sm font-semibold tracking-tight">
-            WhatsApp Live Preview
-          </CardTitle>
-          <Badge variant="secondary" className="text-[10px] font-normal px-2 py-0">
-            Live
-          </Badge>
-        </div>
-
+    <Card className="flex flex-col h-full min-h-0 p-0 gap-0 border">
+      <div className="flex items-center justify-end rounded-t-xl border-b border-border/80 bg-muted/30 p-2 text-foreground shrink-0">
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-auto">
-          <TabsList variant="default" className="h-8 p-0.5 bg-muted/60">
-            <TabsTrigger value="preview" className="text-xs px-2.5 h-7">
+          <TabsList variant="default" className="p-0.5 bg-muted/60">
+            <TabsTrigger value="preview" className="text-xs px-2.5">
               <Eye className="size-3.5 mr-1" />
               Bubble
             </TabsTrigger>
-            <TabsTrigger value="raw" className="text-xs px-2.5 h-7">
+            <TabsTrigger value="raw" className="text-xs px-2.5">
               <FileCode2 className="size-3.5 mr-1" />
               Raw Syntax
             </TabsTrigger>
           </TabsList>
         </Tabs>
-      </CardHeader>
+      </div>
 
-      <CardContent className="flex-1 p-4 bg-zinc-100/60 dark:bg-zinc-950/40 flex flex-col justify-between min-h-[300px] sm:min-h-[360px]">
+      <CardContent className="relative flex-1 min-h-0 p-4 overflow-y-auto scrollbar-thumb-accent">
         {activeTab === "preview" ? (
-          <div className="flex flex-col justify-start h-full">
+          <div className="flex flex-col justify-start">
             {whatsappText.trim() ? (
               <div className="self-end max-w-[92%] sm:max-w-[85%] rounded-2xl rounded-tr-xs bg-[#e7fce3] dark:bg-[#004d40] border border-emerald-300/40 dark:border-emerald-800/40 p-3.5 shadow-xs transition-all">
                 {renderFormattedMessage(whatsappText)}
@@ -142,9 +134,9 @@ export function Preview({ whatsappText }: PreviewProps) {
             )}
           </div>
         ) : (
-          <div className="h-full flex flex-col">
+          <div className="h-full flex flex-col min-h-0">
             {whatsappText.trim() ? (
-              <div className="relative flex-1 rounded-lg border border-border/80 bg-background p-3.5 font-mono text-xs text-foreground overflow-auto whitespace-pre-wrap break-words leading-relaxed select-all">
+              <div className="relative flex-1 min-h-0 rounded-lg border border-border/80 bg-background p-3.5 font-mono text-xs text-foreground overflow-y-auto [scrollbar-width:thin] whitespace-pre-wrap break-words leading-relaxed select-all">
                 {whatsappText}
               </div>
             ) : (

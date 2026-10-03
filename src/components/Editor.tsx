@@ -13,6 +13,7 @@ import { $getRoot, $createParagraphNode } from "lexical"
 
 import { WhatsAppToolbar } from "./application/WhatsAppToolbar"
 import { useEditor } from "@/hooks/useEditor";
+import { Card, CardContent, CardHeader } from "./ui/card"
 
 interface RegisterClearPluginProps {
   onRegisterClear?: (clearFn: () => void) => void
@@ -47,14 +48,17 @@ export function Editor({ onChangeText, onRegisterClear }: EditorProps) {
   const { initialConfig, handleEditorChange } = useEditor({ onChangeText })
 
   return (
-    <div className="flex flex-col h-full rounded-xl border border-border bg-card shadow-xs transition-shadow focus-within:ring-2 focus-within:ring-ring/40">
+    <Card className="flex flex-col h-full min-h-0 p-0 gap-0 border">
       <LexicalComposer initialConfig={initialConfig}>
-        <WhatsAppToolbar />
-        <div className="relative flex-1 p-4 min-h-[280px] sm:min-h-[340px]">
+        <CardHeader className="p-0">
+          <WhatsAppToolbar />
+        </CardHeader>
+
+        <CardContent className="relative flex-1 min-h-0 p-4 overflow-y-auto scrollbar-thumb-accent">
           <RichTextPlugin
             contentEditable={
               <ContentEditable
-                className="outline-none h-full min-h-[260px] sm:min-h-[320px] text-sm leading-relaxed text-foreground"
+                className="outline-none min-h-full text-sm leading-relaxed text-foreground wrap-break-word"
                 aria-label="WhatsApp Message Editor"
               />
             }
@@ -69,8 +73,8 @@ export function Editor({ onChangeText, onRegisterClear }: EditorProps) {
           <ListPlugin />
           <OnChangePlugin onChange={handleEditorChange} />
           <RegisterClearPlugin onRegisterClear={onRegisterClear} />
-        </div>
+        </CardContent>
       </LexicalComposer>
-    </div>
+    </Card>
   )
 }

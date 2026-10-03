@@ -10,7 +10,7 @@ import { IconBaseline } from '@tabler/icons-react';
 
 export function Header() {
   return (
-    <header className="flex items-center justify-between sticky top-0 z-50 w-full border-b border-border/60 bg-background/80 backdrop-blur-md">
+    <header className="flex items-center justify-between sticky top-0 z-50 w-full border-b border-border/60 bg-background/80 backdrop-blur-md shrink-0">
       <div className="flex items-center gap-0">
         <IconBaseline size={35} />
         <div className="flex flex-col items-center text-sm leading-none text-foreground">
