@@ -188,11 +188,21 @@ export const AnimatedThemeToggler = ({
     useEffect(() => {
         if (isControlled) return
 
+        const savedTheme = localStorage.getItem("theme")
+        const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches
+        const shouldBeDark = savedTheme === "dark" || (!savedTheme && prefersDark)
+
+        if (shouldBeDark) {
+            document.documentElement.classList.add("dark")
+            setInternalIsDark(true)
+        } else {
+            document.documentElement.classList.remove("dark")
+            setInternalIsDark(false)
+        }
+
         const updateTheme = () => {
             setInternalIsDark(document.documentElement.classList.contains("dark"))
         }
-
-        updateTheme()
 
         const observer = new MutationObserver(updateTheme)
         observer.observe(document.documentElement, {
@@ -206,20 +216,17 @@ export const AnimatedThemeToggler = ({
     const toggleTheme = useCallback(() => {
         const button = buttonRef.current
         if (
-            !button ||
             isTransitioningRef.current ||
             document.documentElement.dataset.magicuiThemeVt === "active"
         )
             return
 
-        // innerWidth/innerHeight (not visualViewport): percentages must resolve
-        // against the snapshot reference box, which includes classic scrollbars.
         const viewportWidth = window.innerWidth
         const viewportHeight = window.innerHeight
 
         let x: number
         let y: number
-        if (fromCenter) {
+        if (fromCenter || !button) {
             x = viewportWidth / 2
             y = viewportHeight / 2
         } else {
@@ -235,14 +242,14 @@ export const AnimatedThemeToggler = ({
 
         const applyTheme = () => {
             const newTheme = !isDark
-            // Always toggle the class synchronously so the View Transitions API
-            // snapshots the new theme inside the startViewTransition callback.
             document.documentElement.classList.toggle("dark")
             if (isControlled) {
                 onThemeChange?.(newTheme ? "dark" : "light")
             } else {
                 setInternalIsDark(newTheme)
-                localStorage.setItem("theme", newTheme ? "dark" : "light")
+                try {
+                    localStorage.setItem("theme", newTheme ? "dark" : "light")
+                } catch { }
             }
         }
 
@@ -264,10 +271,8 @@ export const AnimatedThemeToggler = ({
         root.dataset.magicuiThemeVt = "active"
         root.style.setProperty(
             "--magicui-theme-toggle-vt-duration",
-            `${duration}ms`
+            duration + "ms"
         )
-        // Pin the collapsed clip-path via CSS so Firefox does not paint the new
-        // theme unclipped between snapshot and the ready.then() JS animation.
         root.style.setProperty("--magicui-theme-vt-clip-from", clipPath[0])
         const cleanup = () => {
             isTransitioningRef.current = false
@@ -278,34 +283,38 @@ export const AnimatedThemeToggler = ({
         }
 
         isTransitioningRef.current = true
-        const transition = document.startViewTransition(() => {
-            flushSync(applyTheme)
-        })
-        if (typeof transition?.finished?.finally === "function") {
-            transition.finished.finally(cleanup).catch(() => { })
-        } else {
-            cleanup()
-        }
+        try {
+            const transition = document.startViewTransition(() => {
+                flushSync(applyTheme)
+            })
+            if (typeof transition?.finished?.finally === "function") {
+                transition.finished.finally(cleanup).catch(() => { })
+            } else {
+                cleanup()
+            }
 
-        const ready = transition?.ready
-        if (ready && typeof ready.then === "function") {
-            ready
-                .then(() => {
-                    const anim = document.documentElement.animate(
-                        {
-                            clipPath,
-                        },
-                        {
-                            duration,
-                            // Star: linear avoids easing overshoot that fights polygon interpolation at t→1; VT group duration is synced above.
-                            easing: shape === "star" ? "linear" : "ease-in-out",
-                            fill: "forwards",
-                            pseudoElement: "::view-transition-new(root)",
-                        }
-                    )
-                    activeAnimRef.current = anim
-                })
-                .catch(() => { })
+            const ready = transition?.ready
+            if (ready && typeof ready.then === "function") {
+                ready
+                    .then(() => {
+                        const anim = document.documentElement.animate(
+                            {
+                                clipPath,
+                            },
+                            {
+                                duration,
+                                easing: shape === "star" ? "linear" : "ease-in-out",
+                                fill: "forwards",
+                                pseudoElement: "::view-transition-new(root)",
+                            }
+                        )
+                        activeAnimRef.current = anim
+                    })
+                    .catch(() => { })
+            }
+        } catch {
+            applyTheme()
+            cleanup()
         }
     }, [
         shape,
@@ -317,14 +326,27 @@ export const AnimatedThemeToggler = ({
         cancelAnim,
     ])
 
+    const handleRef = (node: HTMLButtonElement | null) => {
+        buttonRef.current = node
+        const propRef = (props as any).ref
+        if (typeof propRef === "function") {
+            propRef(node)
+        } else if (propRef && typeof propRef === "object") {
+            propRef.current = node
+        }
+    }
+
     return (
         <Button
             size="icon"
             variant="ghost"
-            ref={buttonRef}
-            onClick={toggleTheme}
             className={cn(className)}
             {...props}
+            ref={handleRef}
+            onClick={(e) => {
+                toggleTheme()
+                props.onClick?.(e)
+            }}
         >
             {isDark ? <IconSun /> : <IconMoon />}
             <span className="sr-only">Toggle theme</span>
