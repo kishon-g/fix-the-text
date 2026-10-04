@@ -55,20 +55,22 @@ export function Editor({ onChangeText, onRegisterClear }: EditorProps) {
         </CardHeader>
 
         <CardContent className="relative flex-1 min-h-0 p-4 overflow-y-auto scrollbar-thumb-accent">
-          <RichTextPlugin
-            contentEditable={
-              <ContentEditable
-                className="outline-none min-h-full text-sm leading-relaxed text-foreground wrap-break-word"
-                aria-label="WhatsApp Message Editor"
-              />
-            }
-            placeholder={
-              <div className="pointer-events-none absolute top-4 left-4 select-none text-sm text-muted-foreground/60">
-                Write or paste your message here...
-              </div>
-            }
-            ErrorBoundary={LexicalErrorBoundary}
-          />
+          <div className="min-h-full">
+            <RichTextPlugin
+              contentEditable={
+                <ContentEditable
+                  className="outline-none min-h-full text-sm leading-relaxed text-foreground wrap-break-word"
+                  aria-label="WhatsApp Message Editor"
+                />
+              }
+              placeholder={
+                <div className="pointer-events-none absolute top-4 left-4 select-none text-sm text-muted-foreground/60">
+                  Write or paste your message here...
+                </div>
+              }
+              ErrorBoundary={LexicalErrorBoundary}
+            />
+          </div>
           <HistoryPlugin />
           <ListPlugin />
           <OnChangePlugin onChange={handleEditorChange} />
