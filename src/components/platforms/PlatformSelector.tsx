@@ -78,7 +78,7 @@ export function PlatformSelector({
       <ComboboxContent className="w-(--anchor-width) min-w-(--anchor-width)">
         <ComboboxEmpty>No platforms found</ComboboxEmpty>
         <ComboboxList>
-          {(item) => (
+          {(item: PlatformOption) => (
             <ComboboxItem key={item.value} value={item.value} className="gap-2.5">
               <item.icon
                 className={`size-4 shrink-0 ${item.colorClassName}`}
