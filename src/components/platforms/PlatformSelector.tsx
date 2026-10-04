@@ -1,7 +1,14 @@
 "use client"
 
 import * as React from "react"
-import { Combobox as ComboboxPrimitive } from "@base-ui/react"
+import {
+  Combobox,
+  ComboboxContent,
+  ComboboxEmpty,
+  ComboboxInput,
+  ComboboxItem,
+  ComboboxList,
+} from "@/components/ui/combobox"
 import {
   IconBrandWhatsapp,
   IconBrandTelegram,
@@ -39,37 +46,7 @@ const PLATFORM_OPTIONS: PlatformOption[] = [
     bg: "bg-emerald-500/10 dark:bg-emerald-500/20",
     available: true,
     badge: "Active",
-  },
-  {
-    id: "telegram",
-    name: "Telegram",
-    description: "Telegram MarkdownV2 syntax with spoiler & monospace",
-    icon: IconBrandTelegram,
-    color: "text-sky-500",
-    bg: "bg-sky-500/10 dark:bg-sky-500/20",
-    available: false,
-    badge: "Soon",
-  },
-  {
-    id: "slack",
-    name: "Slack",
-    description: "mrkdwn syntax for Slack channels, lists & block quotes",
-    icon: IconBrandSlack,
-    color: "text-amber-500",
-    bg: "bg-amber-500/10 dark:bg-amber-500/20",
-    available: false,
-    badge: "Soon",
-  },
-  {
-    id: "discord",
-    name: "Discord",
-    description: "Discord markdown syntax with code highlighting & timestamps",
-    icon: IconBrandDiscord,
-    color: "text-indigo-500",
-    bg: "bg-indigo-500/10 dark:bg-indigo-500/20",
-    available: false,
-    badge: "Soon",
-  },
+  }
 ]
 
 const PLATFORM_IDS = PLATFORM_OPTIONS.map((p) => p.id)
@@ -84,7 +61,7 @@ export function PlatformSelector({
   const CurrentIcon = currentPlatform.icon
 
   return (
-    <ComboboxPrimitive.Root
+    <Combobox
       items={PLATFORM_IDS}
       value={currentId}
       onValueChange={(val) => {
@@ -97,12 +74,7 @@ export function PlatformSelector({
         className="group relative flex items-center gap-2 rounded-full border border-border/80 bg-background/95 dark:bg-zinc-900/95 px-3.5 py-1.5 text-xs font-medium shadow-sm hover:shadow-md hover:border-emerald-500/50 transition-all duration-200 backdrop-blur-md outline-none focus-visible:ring-2 focus-visible:ring-ring/50 select-none cursor-pointer"
         aria-label="Select target formatting platform"
       >
-        <span className="relative flex size-2 shrink-0">
-          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-          <span className="relative inline-flex rounded-full size-2 bg-emerald-500" />
-        </span>
         <CurrentIcon className={cn("size-4 shrink-0", currentPlatform.color)} />
-        <span className="text-muted-foreground hidden sm:inline">Format for:</span>
         <span className="font-semibold text-foreground tracking-tight">
           {currentPlatform.name}
         </span>
