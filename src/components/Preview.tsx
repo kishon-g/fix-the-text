@@ -1,45 +1,54 @@
-"use client"
+"use client";
 
-import React, { useState } from "react"
-import { IconCheck, IconCode, IconCodeOff, IconCopy, IconMessages } from "@tabler/icons-react"
-
-import { Card, CardContent } from "@/components/ui/card"
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { getPlatformDefinition } from "@/components/platforms"
-import { Button } from "./ui/button"
-import { cn } from "@/lib/utils"
+import {
+  IconCheck,
+  IconCode,
+  IconCodeOff,
+  IconCopy,
+  IconMessages,
+} from "@tabler/icons-react";
+import { useState } from "react";
+import { getPlatformDefinition } from "@/components/platforms";
+import { Card, CardContent } from "@/components/ui/card";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { cn } from "@/lib/utils";
+import { Button } from "./ui/button";
 
 interface PreviewProps {
-  whatsappText?: string
-  text?: string
-  platform?: string
+  whatsappText?: string;
+  text?: string;
+  platform?: string;
 }
 
-export function Preview({ whatsappText, text, platform = "whatsapp" }: PreviewProps) {
-  const [activeTab, setActiveTab] = useState("preview")
-  const [copied, setCopied] = useState(false)
+export function Preview({
+  whatsappText,
+  text,
+  platform = "whatsapp",
+}: PreviewProps) {
+  const [activeTab, setActiveTab] = useState("preview");
+  const [copied, setCopied] = useState(false);
 
-  const contentText = text ?? whatsappText ?? ""
-  const activePlatform = getPlatformDefinition(platform)
-  const PlatformComponent = activePlatform.Component
-  const PlatformIcon = activePlatform.icon
+  const contentText = text ?? whatsappText ?? "";
+  const activePlatform = getPlatformDefinition(platform);
+  const PlatformComponent = activePlatform.Component;
+  const PlatformIcon = activePlatform.icon;
 
   const handleCopy = async () => {
-    if (!contentText.trim()) return
+    if (!contentText.trim()) return;
 
     try {
-      await navigator.clipboard.writeText(contentText)
-      setCopied(true)
-      setTimeout(() => setCopied(false), 2000)
+      await navigator.clipboard.writeText(contentText);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
     } catch (err) {
-      console.error("Failed to copy text: ", err)
+      console.error("Failed to copy text: ", err);
     }
-  }
+  };
 
   const timeString = new Date().toLocaleTimeString([], {
     hour: "2-digit",
     minute: "2-digit",
-  })
+  });
 
   return (
     <Card className="flex flex-col h-full min-h-0 p-0 gap-0 border">
@@ -74,7 +83,9 @@ export function Preview({ whatsappText, text, platform = "whatsapp" }: PreviewPr
               <IconCopy className="size-3.5" />
               <span>Copy</span>
               {PlatformIcon && (
-                <PlatformIcon className={cn("size-3.5", activePlatform.colorClassName)} />
+                <PlatformIcon
+                  className={cn("size-3.5", activePlatform.colorClassName)}
+                />
               )}
               <span>{activePlatform.name}</span>
             </>
@@ -96,7 +107,8 @@ export function Preview({ whatsappText, text, platform = "whatsapp" }: PreviewPr
                 <IconCodeOff className="size-8 mb-2 stroke-[1.5] text-muted-foreground/40" />
                 <p className="text-sm font-medium">No raw syntax generated</p>
                 <p className="text-xs text-muted-foreground/70 mt-1">
-                  {activePlatform.rawSyntaxPlaceholder ?? "Type in the editor to view the formatted raw text."}
+                  {activePlatform.rawSyntaxPlaceholder ??
+                    "Type in the editor to view the formatted raw text."}
                 </p>
               </div>
             )}
@@ -104,5 +116,5 @@ export function Preview({ whatsappText, text, platform = "whatsapp" }: PreviewPr
         )}
       </CardContent>
     </Card>
-  )
+  );
 }

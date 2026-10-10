@@ -1,20 +1,19 @@
-"use client"
+"use client";
 
-import React from "react"
-import { TooltipProvider } from "@/components/ui/tooltip"
-import { Separator } from "@/components/ui/separator"
-import { ToolbarProvider } from "@/context/ToolbarContext"
 import {
   BoldButton,
-  ItalicButton,
-  StrikethroughButton,
-  CodeButton,
   BulletListButton,
+  ClearAllButton,
+  ClearFormattingButton,
+  CodeButton,
+  ItalicButton,
   NumberedListButton,
   QuoteButton,
-  ClearFormattingButton,
-  ClearAllButton,
+  StrikethroughButton,
 } from "@/components/toolbar";
+import { Separator } from "@/components/ui/separator";
+import { TooltipProvider } from "@/components/ui/tooltip";
+import { ToolbarProvider } from "@/context/ToolbarContext";
 
 export function WhatsAppToolbar() {
   return (
@@ -42,6 +41,5 @@ export function WhatsAppToolbar() {
         </div>
       </TooltipProvider>
     </ToolbarProvider>
-  )
+  );
 }
-

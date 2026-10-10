@@ -1,12 +1,11 @@
-import { Button } from "./ui/button";
-import { IconMessage } from '@tabler/icons-react';
-import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip";
 import { FeedbackDialog } from "./FeedbackDialog";
 
 export function Footer() {
   return (
     <footer className="flex items-center justify-between w-full border-t border-border/60 bg-background/80 backdrop-blur-md shrink-0">
-      <p className="text-xs text-zinc-500">Made for messages that deserve more than a tiny text box</p>
+      <p className="text-xs text-zinc-500">
+        Made for messages that deserve more than a tiny text box
+      </p>
 
       {/* <Tooltip>
         <TooltipTrigger>
@@ -20,5 +19,5 @@ export function Footer() {
       </Tooltip> */}
       <FeedbackDialog />
     </footer>
-  )
+  );
 }

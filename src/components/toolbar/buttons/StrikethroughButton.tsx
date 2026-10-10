@@ -1,17 +1,16 @@
-"use client"
+"use client";
 
-import React from "react"
-import { IconStrikethrough } from "@tabler/icons-react"
-import { Button } from "@/components/ui/button"
+import { IconStrikethrough } from "@tabler/icons-react";
+import { Button } from "@/components/ui/button";
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
-} from "@/components/ui/tooltip"
-import { useToolbar } from "../../../context/ToolbarContext"
+} from "@/components/ui/tooltip";
+import { useToolbar } from "../../../context/ToolbarContext";
 
 export function StrikethroughButton() {
-  const { isStrikethrough, formatStrikethrough } = useToolbar()
+  const { isStrikethrough, formatStrikethrough } = useToolbar();
 
   return (
     <Tooltip>
@@ -32,5 +31,5 @@ export function StrikethroughButton() {
         <span className="ml-1 text-[10px] opacity-70">~text~</span>
       </TooltipContent>
     </Tooltip>
-  )
+  );
 }

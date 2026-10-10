@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
-export * from "./WhatsAppPreview"
-export * from "./whatsappFormatter"
+export * from "./WhatsAppPreview";
+export * from "./whatsappFormatter";

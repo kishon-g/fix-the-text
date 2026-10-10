@@ -1,4 +1,4 @@
-import type { EditorThemeClasses } from "lexical"
+import type { EditorThemeClasses } from "lexical";
 
 export const editorTheme: EditorThemeClasses = {
   paragraph: "mb-2 last:mb-0 leading-relaxed text-foreground",
@@ -15,4 +15,4 @@ export const editorTheme: EditorThemeClasses = {
     strikethrough: "line-through text-muted-foreground/80",
     code: "font-mono text-[0.875em] bg-muted/80 text-foreground px-1.5 py-0.5 rounded border border-border/60",
   },
-}
+};

@@ -1,12 +1,12 @@
 "use client";
 
-import { useCallback, useMemo } from "react";
-import { HeadingNode, QuoteNode } from "@lexical/rich-text";
-import { ListNode, ListItemNode } from "@lexical/list";
 import { CodeNode } from "@lexical/code-core";
+import { ListItemNode, ListNode } from "@lexical/list";
+import { HeadingNode, QuoteNode } from "@lexical/rich-text";
 import { $getRoot, type LexicalEditor } from "lexical";
-import { convertEditorStateToWhatsApp } from "@/lib/whatsappConverter";
+import { useCallback, useMemo } from "react";
 import { editorTheme } from "@/lib/editorTheme";
+import { convertEditorStateToWhatsApp } from "@/lib/whatsappConverter";
 
 export function onError(error: Error) {
   console.error("Lexical Editor Error:", error);

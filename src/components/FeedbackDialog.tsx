@@ -1,4 +1,13 @@
+import { IconMessage } from "@tabler/icons-react";
 import { Button } from "@/components/ui/button";
+import {
+  Combobox,
+  ComboboxContent,
+  ComboboxEmpty,
+  ComboboxInput,
+  ComboboxItem,
+  ComboboxList,
+} from "@/components/ui/combobox";
 import {
   Dialog,
   DialogClose,
@@ -9,21 +18,12 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Field, FieldLabel, FieldGroup } from "@/components/ui/field";
-import { IconMessage } from "@tabler/icons-react";
+import { Field, FieldGroup, FieldLabel } from "@/components/ui/field";
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import {
-  Combobox,
-  ComboboxContent,
-  ComboboxEmpty,
-  ComboboxInput,
-  ComboboxItem,
-  ComboboxList,
-} from "@/components/ui/combobox";
 import { Textarea } from "./ui/textarea";
 
 const feedbackCategories = [

@@ -1,17 +1,16 @@
-"use client"
+"use client";
 
-import React from "react"
-import { IconCode } from "@tabler/icons-react"
-import { Button } from "@/components/ui/button"
+import { IconCode } from "@tabler/icons-react";
+import { Button } from "@/components/ui/button";
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
-} from "@/components/ui/tooltip"
-import { useToolbar } from "../../../context/ToolbarContext"
+} from "@/components/ui/tooltip";
+import { useToolbar } from "../../../context/ToolbarContext";
 
 export function CodeButton() {
-  const { isCode, formatCode } = useToolbar()
+  const { isCode, formatCode } = useToolbar();
 
   return (
     <Tooltip>
@@ -32,5 +31,5 @@ export function CodeButton() {
         <span className="ml-1 text-[10px] opacity-70">`text`</span>
       </TooltipContent>
     </Tooltip>
-  )
+  );
 }

@@ -1,17 +1,16 @@
-"use client"
+"use client";
 
-import React from "react"
-import { IconQuote } from "@tabler/icons-react"
-import { Button } from "@/components/ui/button"
+import { IconQuote } from "@tabler/icons-react";
+import { Button } from "@/components/ui/button";
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
-} from "@/components/ui/tooltip"
-import { useToolbar } from "@/context/ToolbarContext"
+} from "@/components/ui/tooltip";
+import { useToolbar } from "@/context/ToolbarContext";
 
 export function QuoteButton() {
-  const { isQuote, toggleQuote } = useToolbar()
+  const { isQuote, toggleQuote } = useToolbar();
 
   return (
     <Tooltip>
@@ -32,5 +31,5 @@ export function QuoteButton() {
         <span className="ml-1 text-[10px] opacity-70">&gt; text</span>
       </TooltipContent>
     </Tooltip>
-  )
+  );
 }

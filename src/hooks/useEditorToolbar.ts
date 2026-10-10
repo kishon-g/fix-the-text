@@ -1,24 +1,24 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
-import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
 import {
+  $isListNode,
+  INSERT_ORDERED_LIST_COMMAND,
+  INSERT_UNORDERED_LIST_COMMAND,
+  REMOVE_LIST_COMMAND,
+} from "@lexical/list";
+import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
+import { $createQuoteNode, $isQuoteNode } from "@lexical/rich-text";
+import { $setBlocksType } from "@lexical/selection";
+import {
+  $createParagraphNode,
   $getRoot,
   $getSelection,
   $isRangeSelection,
-  $createParagraphNode,
+  COMMAND_PRIORITY_CRITICAL,
   FORMAT_TEXT_COMMAND,
   SELECTION_CHANGE_COMMAND,
-  COMMAND_PRIORITY_CRITICAL,
 } from "lexical";
-import {
-  INSERT_UNORDERED_LIST_COMMAND,
-  INSERT_ORDERED_LIST_COMMAND,
-  REMOVE_LIST_COMMAND,
-  $isListNode,
-} from "@lexical/list";
-import { $createQuoteNode, $isQuoteNode } from "@lexical/rich-text";
-import { $setBlocksType } from "@lexical/selection";
+import { useCallback, useEffect, useState } from "react";
 
 export interface EditorToolbarState {
   // Format States
