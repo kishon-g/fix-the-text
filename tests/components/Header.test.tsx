@@ -7,7 +7,7 @@ describe("Header Component", () => {
   it("renders the branding title and subtitle", () => {
     render(<Header />);
     expect(screen.getByText("Fix The")).toBeInTheDocument();
-    expect(screen.getByText("TEXT")).toBeInTheDocument();
+    expect(screen.getByText(/Text/i)).toBeInTheDocument();
   });
 
   it("renders the platform selector", () => {

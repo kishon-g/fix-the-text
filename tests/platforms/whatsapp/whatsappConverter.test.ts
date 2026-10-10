@@ -22,6 +22,10 @@ function createTestEditor() {
   });
 }
 
+function updateEditor(editor: ReturnType<typeof createTestEditor>, fn: () => void) {
+  editor.update(fn, { discrete: true });
+}
+
 describe("whatsappConverter", () => {
   it("converts empty editor to empty string", () => {
     const editor = createTestEditor();
@@ -31,7 +35,7 @@ describe("whatsappConverter", () => {
 
   it("converts plain paragraph text", () => {
     const editor = createTestEditor();
-    editor.update(() => {
+    updateEditor(editor, () => {
       const root = $getRoot();
       const p = $createParagraphNode();
       p.append($createTextNode("Hello world"));
@@ -44,7 +48,7 @@ describe("whatsappConverter", () => {
 
   it("converts bold formatted text to *text*", () => {
     const editor = createTestEditor();
-    editor.update(() => {
+    updateEditor(editor, () => {
       const root = $getRoot();
       const p = $createParagraphNode();
       const textNode = $createTextNode("Bold text");
@@ -59,7 +63,7 @@ describe("whatsappConverter", () => {
 
   it("converts italic formatted text to _text_", () => {
     const editor = createTestEditor();
-    editor.update(() => {
+    updateEditor(editor, () => {
       const root = $getRoot();
       const p = $createParagraphNode();
       const textNode = $createTextNode("Italic text");
@@ -74,7 +78,7 @@ describe("whatsappConverter", () => {
 
   it("converts strikethrough formatted text to ~text~", () => {
     const editor = createTestEditor();
-    editor.update(() => {
+    updateEditor(editor, () => {
       const root = $getRoot();
       const p = $createParagraphNode();
       const textNode = $createTextNode("Strike text");
@@ -89,7 +93,7 @@ describe("whatsappConverter", () => {
 
   it("converts inline code formatted text to `text`", () => {
     const editor = createTestEditor();
-    editor.update(() => {
+    updateEditor(editor, () => {
       const root = $getRoot();
       const p = $createParagraphNode();
       const textNode = $createTextNode("const a = 1;");
@@ -104,7 +108,7 @@ describe("whatsappConverter", () => {
 
   it("converts multiple inline formats with text merging", () => {
     const editor = createTestEditor();
-    editor.update(() => {
+    updateEditor(editor, () => {
       const root = $getRoot();
       const p = $createParagraphNode();
 
@@ -126,7 +130,7 @@ describe("whatsappConverter", () => {
 
   it("handles line breaks inside paragraphs", () => {
     const editor = createTestEditor();
-    editor.update(() => {
+    updateEditor(editor, () => {
       const root = $getRoot();
       const p = $createParagraphNode();
       p.append(
@@ -143,7 +147,7 @@ describe("whatsappConverter", () => {
 
   it("converts unordered bullet lists to - prefix", () => {
     const editor = createTestEditor();
-    editor.update(() => {
+    updateEditor(editor, () => {
       const root = $getRoot();
       const list = $createListNode("bullet");
 
@@ -163,7 +167,7 @@ describe("whatsappConverter", () => {
 
   it("converts ordered numbered lists to 1., 2. prefix", () => {
     const editor = createTestEditor();
-    editor.update(() => {
+    updateEditor(editor, () => {
       const root = $getRoot();
       const list = $createListNode("number");
 
@@ -183,7 +187,7 @@ describe("whatsappConverter", () => {
 
   it("converts quote nodes to > prefix for each line", () => {
     const editor = createTestEditor();
-    editor.update(() => {
+    updateEditor(editor, () => {
       const root = $getRoot();
       const quote = $createQuoteNode();
       quote.append(
@@ -200,7 +204,7 @@ describe("whatsappConverter", () => {
 
   it("converts code block node to triple backticks", () => {
     const editor = createTestEditor();
-    editor.update(() => {
+    updateEditor(editor, () => {
       const root = $getRoot();
       const code = $createCodeNode();
       code.append($createTextNode("function test() {\n  return 42;\n}"));

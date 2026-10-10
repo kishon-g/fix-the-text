@@ -31,12 +31,15 @@ describe("useEditor Hook", () => {
       nodes: result.current.initialConfig.nodes,
     });
 
-    editor.update(() => {
-      const root = $getRoot();
-      const p = $createParagraphNode();
-      p.append($createTextNode("Hello world from unit test"));
-      root.append(p);
-    });
+    editor.update(
+      () => {
+        const root = $getRoot();
+        const p = $createParagraphNode();
+        p.append($createTextNode("Hello world from unit test"));
+        root.append(p);
+      },
+      { discrete: true },
+    );
 
     result.current.handleEditorChange(editor.getEditorState(), editor);
 

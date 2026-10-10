@@ -19,11 +19,11 @@ describe("WhatsAppToolbar", () => {
     expect(screen.getByLabelText(/Bold/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/Italic/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/Strikethrough/i)).toBeInTheDocument();
-    expect(screen.getByLabelText(/Inline Code/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/Monospace/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/Bullet List/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/Numbered List/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/Quote/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/Clear Formatting/i)).toBeInTheDocument();
-    expect(screen.getByLabelText(/Clear All/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/Clear text/i)).toBeInTheDocument();
   });
 });

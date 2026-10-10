@@ -52,7 +52,7 @@ describe("Toolbar Buttons", () => {
   it("BoldButton calls formatBold on click and shows active styling", async () => {
     const user = userEvent.setup();
     const formatBold = vi.fn();
-    const { rerender } = renderWithToolbar(<BoldButton />, {
+    const { unmount } = renderWithToolbar(<BoldButton />, {
       isBold: false,
       formatBold,
     });
@@ -62,6 +62,7 @@ describe("Toolbar Buttons", () => {
     await user.click(button);
     expect(formatBold).toHaveBeenCalled();
 
+    unmount();
     renderWithToolbar(<BoldButton />, { isBold: true });
     const activeButton = screen.getByLabelText(/Bold/i);
     expect(activeButton).toHaveClass("bg-accent");
@@ -90,7 +91,7 @@ describe("Toolbar Buttons", () => {
     const formatCode = vi.fn();
     renderWithToolbar(<CodeButton />, { formatCode });
 
-    await user.click(screen.getByLabelText(/Inline Code/i));
+    await user.click(screen.getByLabelText(/Monospace/i));
     expect(formatCode).toHaveBeenCalled();
   });
 
@@ -135,7 +136,7 @@ describe("Toolbar Buttons", () => {
     const clearAll = vi.fn();
     renderWithToolbar(<ClearAllButton />, { clearAll });
 
-    await user.click(screen.getByLabelText(/Clear All/i));
+    await user.click(screen.getByLabelText(/Clear text/i));
     expect(clearAll).toHaveBeenCalled();
   });
 });

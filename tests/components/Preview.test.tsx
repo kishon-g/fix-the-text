@@ -10,12 +10,12 @@ describe("Preview Component", () => {
     expect(screen.getByText("Chat View")).toBeInTheDocument();
     expect(screen.getByText("Raw Syntax")).toBeInTheDocument();
     expect(screen.getByText("Hello test")).toBeInTheDocument();
-    expect(screen.getByRole("button", { name: /Copy WhatsApp/i })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: /Copy\s*WhatsApp/i })).toBeInTheDocument();
   });
 
   it("disables copy button when text is empty", () => {
     render(<Preview text="" platform="whatsapp" />);
-    const copyButton = screen.getByRole("button", { name: /Copy WhatsApp/i });
+    const copyButton = screen.getByRole("button", { name: /Copy\s*WhatsApp/i });
     expect(copyButton).toBeDisabled();
   });
 
@@ -42,15 +42,20 @@ describe("Preview Component", () => {
 
   it("copies content to clipboard and shows copied state", async () => {
     const user = userEvent.setup();
+    const writeTextSpy = vi
+      .spyOn(navigator.clipboard, "writeText")
+      .mockResolvedValue(undefined);
+
     render(<Preview text="Text to copy" platform="whatsapp" />);
 
-    const copyButton = screen.getByRole("button", { name: /Copy WhatsApp/i });
+    const copyButton = screen.getByRole("button", { name: /Copy\s*WhatsApp/i });
     expect(copyButton).not.toBeDisabled();
 
     await user.click(copyButton);
 
-    expect(navigator.clipboard.writeText).toHaveBeenCalledWith("Text to copy");
+    expect(writeTextSpy).toHaveBeenCalledWith("Text to copy");
     expect(screen.getByText("Copied!")).toBeInTheDocument();
+    writeTextSpy.mockRestore();
   });
 
   it("supports backwards-compatible whatsappText prop", () => {

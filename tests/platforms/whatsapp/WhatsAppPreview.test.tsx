@@ -12,7 +12,7 @@ describe("WhatsAppPreview", () => {
   });
 
   it("renders empty state when text is only whitespace", () => {
-    render(<WhatsAppPreview text="   \n  " />);
+    render(<WhatsAppPreview text={"   \n  "} />);
     expect(screen.getByText("No content to preview")).toBeInTheDocument();
   });
 
