@@ -1,11 +1,13 @@
 "use client"
 
 import React, { useState } from "react"
-import { IconCode, IconCodeOff, IconMessages } from "@tabler/icons-react"
+import { IconCheck, IconCode, IconCodeOff, IconCopy, IconMessages } from "@tabler/icons-react"
 
 import { Card, CardContent } from "@/components/ui/card"
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { getPlatformDefinition } from "@/components/platforms"
+import { Button } from "./ui/button"
+import { cn } from "@/lib/utils"
 
 interface PreviewProps {
   whatsappText?: string
@@ -15,10 +17,24 @@ interface PreviewProps {
 
 export function Preview({ whatsappText, text, platform = "whatsapp" }: PreviewProps) {
   const [activeTab, setActiveTab] = useState("preview")
+  const [copied, setCopied] = useState(false)
 
   const contentText = text ?? whatsappText ?? ""
   const activePlatform = getPlatformDefinition(platform)
   const PlatformComponent = activePlatform.Component
+  const PlatformIcon = activePlatform.icon
+
+  const handleCopy = async () => {
+    if (!contentText.trim()) return
+
+    try {
+      await navigator.clipboard.writeText(contentText)
+      setCopied(true)
+      setTimeout(() => setCopied(false), 2000)
+    } catch (err) {
+      console.error("Failed to copy text: ", err)
+    }
+  }
 
   const timeString = new Date().toLocaleTimeString([], {
     hour: "2-digit",
@@ -27,7 +43,7 @@ export function Preview({ whatsappText, text, platform = "whatsapp" }: PreviewPr
 
   return (
     <Card className="flex flex-col h-full min-h-0 p-0 gap-0 border">
-      <div className="flex items-center justify-end rounded-t-xl border-b border-border/80 bg-muted/30 p-2 text-foreground shrink-0">
+      <div className="flex items-center justify-between rounded-t-xl border-b border-border/80 bg-muted/30 p-2 text-foreground shrink-0">
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-auto">
           <TabsList variant="default" className="p-0.5 bg-muted/60">
             <TabsTrigger value="preview" className="text-xs px-2.5">
@@ -40,6 +56,30 @@ export function Preview({ whatsappText, text, platform = "whatsapp" }: PreviewPr
             </TabsTrigger>
           </TabsList>
         </Tabs>
+
+        <Button
+          size="sm"
+          variant="secondary"
+          onClick={handleCopy}
+          disabled={!contentText.trim()}
+          className="cursor-pointer text-xs"
+        >
+          {copied ? (
+            <>
+              <IconCheck className="size-3.5 text-emerald-500" />
+              <span>Copied!</span>
+            </>
+          ) : (
+            <>
+              <IconCopy className="size-3.5" />
+              <span>Copy</span>
+              {PlatformIcon && (
+                <PlatformIcon className={cn("size-3.5", activePlatform.colorClassName)} />
+              )}
+              <span>{activePlatform.name}</span>
+            </>
+          )}
+        </Button>
       </div>
 
       <CardContent className="relative flex-1 min-h-0 p-4 overflow-y-auto scrollbar-thumb-accent">

@@ -4,7 +4,7 @@ import { useCallback, useMemo } from "react";
 import { HeadingNode, QuoteNode } from "@lexical/rich-text";
 import { ListNode, ListItemNode } from "@lexical/list";
 import { CodeNode } from "@lexical/code-core";
-import { $getRoot, LexicalEditor } from "lexical";
+import { $getRoot, type LexicalEditor } from "lexical";
 import { convertEditorStateToWhatsApp } from "@/lib/whatsappConverter";
 import { editorTheme } from "@/lib/editorTheme";
 

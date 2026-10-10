@@ -1,7 +1,7 @@
 "use client"
 
 import React from "react"
-import { PlatformDefinition } from "./types"
+import type { PlatformDefinition } from "./types"
 import { WhatsAppPreview } from "./whatsapp"
 
 export const PLATFORM_REGISTRY: Record<string, PlatformDefinition> = {

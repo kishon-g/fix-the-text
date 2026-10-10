@@ -1,7 +1,7 @@
 "use client"
 
-import React, { createContext, useContext, ReactNode } from "react"
-import { useEditorToolbar, EditorToolbarState } from "@/hooks/useEditorToolbar"
+import React, { createContext, useContext, type ReactNode } from "react"
+import { useEditorToolbar, type EditorToolbarState } from "@/hooks/useEditorToolbar"
 
 export type ToolbarContextType = EditorToolbarState
 

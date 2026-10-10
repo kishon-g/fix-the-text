@@ -2,7 +2,7 @@
 
 import React from "react"
 import { IconChecks, IconMessagesOff } from "@tabler/icons-react"
-import { PlatformPreviewProps } from "../types"
+import type { PlatformPreviewProps } from "../types"
 import { renderWhatsAppMessage } from "./whatsappFormatter"
 
 export function WhatsAppPreview({ text, timeString }: PlatformPreviewProps) {

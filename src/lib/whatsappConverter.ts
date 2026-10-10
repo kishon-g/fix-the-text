@@ -3,8 +3,8 @@ import {
   $isElementNode,
   $isLineBreakNode,
   $isTextNode,
-  LexicalEditor,
-  LexicalNode,
+  type LexicalEditor,
+  type LexicalNode,
 } from "lexical"
 import { $isListNode, $isListItemNode } from "@lexical/list"
 import { $isQuoteNode } from "@lexical/rich-text"
