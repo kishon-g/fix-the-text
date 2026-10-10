@@ -1,5 +1,6 @@
 "use client";
 
+import { IconBrandWhatsapp } from "@tabler/icons-react";
 import type { PlatformDefinition } from "./types";
 import { WhatsAppPreview } from "./whatsapp";
 
@@ -8,6 +9,8 @@ export const PLATFORM_REGISTRY: Record<string, PlatformDefinition> = {
     id: "whatsapp",
     name: "WhatsApp",
     badgeLabel: "WhatsApp View",
+    colorClassName: "text-emerald-500",
+    icon: IconBrandWhatsapp,
     Component: WhatsAppPreview,
     rawSyntaxPlaceholder:
       "Type in the editor to view the WhatsApp formatted markdown text.",

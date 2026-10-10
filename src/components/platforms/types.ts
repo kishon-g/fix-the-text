@@ -11,6 +11,8 @@ export interface PlatformDefinition {
   id: string;
   name: string;
   badgeLabel?: string;
+  colorClassName?: string;
+  icon?: React.ComponentType<{ className?: string }>;
   Component: React.ComponentType<PlatformPreviewProps>;
   rawSyntaxPlaceholder?: string;
 }
