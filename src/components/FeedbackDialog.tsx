@@ -1,8 +1,9 @@
 "use client";
 
-import { IconMessage } from "@tabler/icons-react";
+import { IconCheck, IconMessage } from "@tabler/icons-react";
 import { useActionState, useEffect, useState } from "react";
 import { type FeedbackState, submitFeedback } from "@/app/actions/feedback";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import {
   Combobox,
@@ -22,7 +23,12 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Field, FieldGroup, FieldLabel } from "@/components/ui/field";
+import {
+  Field,
+  FieldDescription,
+  FieldGroup,
+  FieldLabel,
+} from "@/components/ui/field";
 import {
   Tooltip,
   TooltipContent,
@@ -61,7 +67,7 @@ export function FeedbackDialog() {
         setOpen(false);
         setSubmitted(false);
         setMessage("");
-      }, 1500);
+      }, 2000);
       return () => clearTimeout(timer);
     }
   }, [state?.success]);
@@ -91,11 +97,14 @@ export function FeedbackDialog() {
       </Tooltip>
       <DialogContent className="sm:max-w-sm">
         {submitted ? (
-          <div className="py-6 text-center">
-            <h3 className="font-medium text-lg text-foreground">Thank you!</h3>
-            <p className="mt-2 text-muted-foreground text-sm">
-              Your feedback has been submitted successfully.
-            </p>
+          <div className="py-2">
+            <Alert>
+              <IconCheck className="size-4 text-emerald-500" />
+              <AlertTitle>Thank you!</AlertTitle>
+              <AlertDescription>
+                Your feedback has been submitted successfully.
+              </AlertDescription>
+            </Alert>
           </div>
         ) : (
           <form action={formAction}>
@@ -123,7 +132,7 @@ export function FeedbackDialog() {
                     <ComboboxEmpty>No categories found.</ComboboxEmpty>
                     <ComboboxList>
                       {(item) => (
-                        <ComboboxItem key={item} value={item}>
+                        <ComboboxItem key={item} value={item} className="cursor-pointer">
                           {item}
                         </ComboboxItem>
                       )}
@@ -134,12 +143,14 @@ export function FeedbackDialog() {
 
               <Field>
                 <FieldLabel htmlFor="textarea-message">Message</FieldLabel>
+                <FieldDescription className="text-xs">Max 500 characters</FieldDescription>
                 <Textarea
                   id="textarea-message"
                   name="message"
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
                   placeholder="Describe your feedback, suggestion, or issue..."
+                  maxLength={500}
                   required
                 />
               </Field>

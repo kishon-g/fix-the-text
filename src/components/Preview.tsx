@@ -55,11 +55,11 @@ export function Preview({
       <div className="flex items-center justify-between rounded-t-xl border-b border-border/80 bg-muted/30 p-2 text-foreground shrink-0">
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-auto">
           <TabsList variant="default" className="p-0.5 bg-muted/60">
-            <TabsTrigger value="preview" className="text-xs px-2.5">
+            <TabsTrigger value="preview" className="text-xs px-2.5 cursor-pointer">
               <IconMessages className="size-3.5 mr-1" />
               Chat View
             </TabsTrigger>
-            <TabsTrigger value="raw" className="text-xs px-2.5">
+            <TabsTrigger value="raw" className="text-xs px-2.5 cursor-pointer">
               <IconCode className="size-3.5 mr-1" />
               Raw Syntax
             </TabsTrigger>
@@ -103,7 +103,7 @@ export function Preview({
                 {contentText}
               </div>
             ) : (
-              <div className="flex flex-col items-center justify-center py-16 text-center text-muted-foreground/60">
+              <div className="flex flex-col items-center justify-center h-full py-16 text-center text-muted-foreground/60">
                 <IconCodeOff className="size-8 mb-2 stroke-[1.5] text-muted-foreground/40" />
                 <p className="text-sm font-medium">No raw syntax generated</p>
                 <p className="text-xs text-muted-foreground/70 mt-1">

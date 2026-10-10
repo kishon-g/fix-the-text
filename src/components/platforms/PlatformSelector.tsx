@@ -63,7 +63,7 @@ export function PlatformSelector({
     >
       <ComboboxTrigger
         className={cn(
-          "flex w-44 items-center justify-between gap-2.5 rounded-md border border-input bg-background px-3 py-2 text-sm font-medium text-foreground shadow-xs",
+          "flex w-44 items-center justify-between gap-2.5 rounded-2xl border border-input bg-background px-3 py-2 text-sm font-medium text-foreground shadow-xs cursor-pointer",
           className,
         )}
       >
@@ -83,7 +83,7 @@ export function PlatformSelector({
             <ComboboxItem
               key={item.value}
               value={item.value}
-              className="gap-2.5"
+              className="gap-2.5 cursor-pointer"
             >
               <item.icon className={`size-4 shrink-0 ${item.colorClassName}`} />
               <span className="font-semibold text-foreground tracking-tight">

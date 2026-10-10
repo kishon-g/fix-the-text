@@ -8,7 +8,7 @@ import {
 
 export type ToolbarContextType = EditorToolbarState;
 
-const ToolbarContext = createContext<ToolbarContextType | null>(null);
+export const ToolbarContext = createContext<ToolbarContextType | null>(null);
 
 export function ToolbarProvider({ children }: { children: ReactNode }) {
   const toolbar = useEditorToolbar();

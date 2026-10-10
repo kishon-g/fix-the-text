@@ -7,7 +7,7 @@ import { renderWhatsAppMessage } from "./whatsappFormatter";
 export function WhatsAppPreview({ text, timeString }: PlatformPreviewProps) {
   if (!text.trim()) {
     return (
-      <div className="flex flex-col items-center justify-center py-16 text-center text-muted-foreground/60">
+      <div className="flex flex-col items-center justify-center h-full py-16 text-center text-muted-foreground/60">
         <IconMessagesOff className="size-8 mb-2 stroke-[1.5] text-muted-foreground/40" />
         <p className="text-sm font-medium">No content to preview</p>
         <p className="text-xs text-muted-foreground/70 mt-1 max-w-xs">
