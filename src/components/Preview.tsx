@@ -55,7 +55,10 @@ export function Preview({
       <div className="flex items-center justify-between rounded-t-xl border-b border-border/80 bg-muted/30 p-2 text-foreground shrink-0">
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-auto">
           <TabsList variant="default" className="p-0.5 bg-muted/60">
-            <TabsTrigger value="preview" className="text-xs px-2.5 cursor-pointer">
+            <TabsTrigger
+              value="preview"
+              className="text-xs px-2.5 cursor-pointer"
+            >
               <IconMessages className="size-3.5 mr-1" />
               Chat View
             </TabsTrigger>

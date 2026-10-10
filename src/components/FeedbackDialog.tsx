@@ -132,7 +132,11 @@ export function FeedbackDialog() {
                     <ComboboxEmpty>No categories found.</ComboboxEmpty>
                     <ComboboxList>
                       {(item) => (
-                        <ComboboxItem key={item} value={item} className="cursor-pointer">
+                        <ComboboxItem
+                          key={item}
+                          value={item}
+                          className="cursor-pointer"
+                        >
                           {item}
                         </ComboboxItem>
                       )}
@@ -143,7 +147,9 @@ export function FeedbackDialog() {
 
               <Field>
                 <FieldLabel htmlFor="textarea-message">Message</FieldLabel>
-                <FieldDescription className="text-xs">Max 500 characters</FieldDescription>
+                <FieldDescription className="text-xs">
+                  Max 500 characters
+                </FieldDescription>
                 <Textarea
                   id="textarea-message"
                   name="message"
