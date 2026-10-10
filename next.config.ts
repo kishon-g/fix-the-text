@@ -1,8 +1,17 @@
 import type { NextConfig } from "next";
 
+const isGithubActions = process.env.GITHUB_ACTIONS === "true";
+const repo = "fix-the-text";
+
 const nextConfig: NextConfig = {
-  /* config options here */
   reactCompiler: true,
+  output: "export",
+  basePath:
+    process.env.NEXT_PUBLIC_BASE_PATH ??
+    (isGithubActions ? `/${repo}` : undefined),
+  images: {
+    unoptimized: true,
+  },
 };
 
 export default nextConfig;
