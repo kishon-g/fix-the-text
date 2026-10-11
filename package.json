@@ -2,7 +2,19 @@
   "name": "fix-the-text",
   "version": "1.0.0",
   "description": "Made for messages that deserve more than a tiny text box",
-  "author": "G. Kishon",
+  "homepage": "https://kishon-g.github.io/fix-the-text/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kishon-g/fix-the-text.git"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "G. Kishon",
+    "url": "https://github.com/kishon-g"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
   "private": true,
   "scripts": {
     "dev": "next dev",
