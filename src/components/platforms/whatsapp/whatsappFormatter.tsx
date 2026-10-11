@@ -3,7 +3,7 @@
 import type React from "react";
 
 export function parseWhatsAppInline(text: string): React.ReactNode[] {
-  const regex = /(\*[^*\\n]+\*|_[^_\\n]+_|~[^~\\n]+~|`[^`\\n]+`)/g;
+  const regex = /(\*[^*\n]+\*|_[^_\n]+_|~[^~\n]+~|`[^`\n]+`)/g;
   const parts = text.split(regex);
 
   return parts.map((part, idx) => {

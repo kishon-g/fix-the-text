@@ -1,6 +1,8 @@
 {
   "name": "fix-the-text",
-  "version": "0.1.0",
+  "version": "1.0.0",
+  "description": "Made for messages that deserve more than a tiny text box",
+  "author": "G. Kishon",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -10,7 +12,10 @@
     "lint:fix": "biome lint --write .",
     "format": "biome format --write .",
     "check": "biome check .",
-    "check:write": "biome check --write ."
+    "check:write": "biome check --write .",
+    "test": "vitest run",
+    "test:ci": "vitest run",
+    "test:watch": "vitest"
   },
   "dependencies": {
     "@base-ui/react": "^1.8.0",
