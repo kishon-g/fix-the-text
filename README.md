@@ -37,10 +37,6 @@ Run the dev server:
 npm run dev
 ```
 
-## Scripts
+## License
 
-- `npm run dev` - start dev server on `http://localhost:3000`
-- `npm run build` - build static export
-- `npm run check` - run Biome lint and format checks
-- `npm run check:write` - fix lint and formatting issues
-- `npm run test` - run tests with Vitest
+[MIT](LICENSE)
