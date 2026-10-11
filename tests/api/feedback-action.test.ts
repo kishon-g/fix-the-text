@@ -1,8 +1,8 @@
 import { describe, expect, it, vi } from "vitest";
 import { submitFeedback } from "@/app/actions/feedback";
-import { createClient } from "@/lib/supabase/server";
+import { createClient } from "@/lib/supabase/client";
 
-vi.mock("@/lib/supabase/server", () => ({
+vi.mock("@/lib/supabase/client", () => ({
   createClient: vi.fn(),
 }));
 
