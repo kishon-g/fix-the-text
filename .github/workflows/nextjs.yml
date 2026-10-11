@@ -5,8 +5,10 @@
 name: Deploy Next.js site to Pages
 
 on:
-  # Runs on pushes targeting the default branch
-  push:
+  # Runs after "CI - Lint and Test" completes on the default branch
+  workflow_run:
+    workflows: ["CI - Lint and Test"]
+    types: [completed]
     branches: ["main"]
 
   # Allows you to run this workflow manually from the Actions tab
@@ -27,6 +29,7 @@ concurrency:
 jobs:
   # Build job
   build:
+    if: ${{ github.event_name == 'workflow_dispatch' || (github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.event != 'pull_request') }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -51,7 +54,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: "22"
           cache: ${{ steps.detect-package-manager.outputs.manager }}
       - name: Setup Pages
         uses: actions/configure-pages@v5
