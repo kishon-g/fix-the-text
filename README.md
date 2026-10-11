@@ -9,10 +9,7 @@ Fix The Text is a simple web editor for writing and formatting messages before s
 ## Features
 
 - Rich text editor with toolbar support for bold, italic, strikethrough, inline code, lists, and quotes
-- Live WhatsApp chat bubble preview alongside a raw syntax view
-- One-click copy to clipboard
-- Light and dark mode
-- In-app feedback form backed by Supabase
+- Live chat bubble preview alongside a raw syntax view
 
 ## Supported Platforms
 
