@@ -28,7 +28,7 @@ Create a `.env` file if you want the feedback form and GitHub header button to w
 ```env
 NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
 NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=your_supabase_publishable_key
-GITHUB_URL=https://github.com/kishon-g/fix-the-text
+REPOSITORY_URL=https://github.com/kishon-g/fix-the-text
 ```
 
 Run the dev server:

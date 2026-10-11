@@ -15,9 +15,9 @@ describe("Header Component", () => {
     expect(screen.getByText("WhatsApp")).toBeInTheDocument();
   });
 
-  it("handles GitHub button click with GITHUB_URL env var", async () => {
-    const originalEnv = process.env.GITHUB_URL;
-    process.env.GITHUB_URL = "https://github.com/example/fix-the-text";
+  it("handles GitHub button click with REPOSITORY_URL env var", async () => {
+    const originalEnv = process.env.REPOSITORY_URL;
+    process.env.REPOSITORY_URL = "https://github.com/example/fix-the-text";
 
     const openSpy = vi.spyOn(window, "open").mockImplementation(() => null);
     const user = userEvent.setup();
@@ -38,6 +38,6 @@ describe("Header Component", () => {
     }
 
     openSpy.mockRestore();
-    process.env.GITHUB_URL = originalEnv;
+    process.env.REPOSITORY_URL = originalEnv;
   });
 });

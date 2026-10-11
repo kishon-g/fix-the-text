@@ -14,7 +14,7 @@ export interface HeaderProps {
 }
 
 const handleGitHubClick = () => {
-  const githubUrl = process.env.GITHUB_URL;
+  const githubUrl = process.env.REPOSITORY_URL;
   if (githubUrl) {
     window.open(githubUrl, "_blank", "noopener,noreferrer");
   }
