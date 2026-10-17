@@ -7,6 +7,7 @@ import {
   ClearAllButton,
   ClearFormattingButton,
   CodeButton,
+  EmojiButton,
   ItalicButton,
   NumberedListButton,
   QuoteButton,
@@ -38,6 +39,7 @@ function renderWithToolbar(
     toggleQuote: vi.fn(),
     clearFormatting: vi.fn(),
     clearAll: vi.fn(),
+    insertEmoji: vi.fn(),
     ...overrides,
   };
 
@@ -123,6 +125,19 @@ describe("Toolbar Buttons", () => {
 
     await user.click(screen.getByLabelText(/Quote/i));
     expect(toggleQuote).toHaveBeenCalled();
+  });
+
+  it("EmojiButton renders and opens emoji picker popover on click", async () => {
+    const user = userEvent.setup();
+    renderWithToolbar(<EmojiButton />);
+
+    const button = screen.getByLabelText(/Emoji/i);
+    expect(button).toBeInTheDocument();
+    await user.click(button);
+
+    expect(
+      await screen.findByPlaceholderText(/Search emoji.../i),
+    ).toBeInTheDocument();
   });
 
   it("ClearFormattingButton calls clearFormatting on click", async () => {

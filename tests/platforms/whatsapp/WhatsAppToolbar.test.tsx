@@ -23,6 +23,7 @@ describe("WhatsAppToolbar", () => {
     expect(screen.getByLabelText(/Bullet List/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/Numbered List/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/Quote/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/Emoji/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/Clear Formatting/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/Clear text/i)).toBeInTheDocument();
   });

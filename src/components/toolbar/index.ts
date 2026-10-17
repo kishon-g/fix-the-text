@@ -3,6 +3,7 @@ export * from "./buttons/BulletListButton";
 export * from "./buttons/ClearAllButton";
 export * from "./buttons/ClearFormattingButton";
 export * from "./buttons/CodeButton";
+export * from "./buttons/EmojiButton";
 export * from "./buttons/ItalicButton";
 export * from "./buttons/NumberedListButton";
 export * from "./buttons/QuoteButton";

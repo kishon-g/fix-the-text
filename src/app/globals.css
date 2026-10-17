@@ -127,4 +127,16 @@
   html {
     @apply font-sans;
   }
+
+  /* Hide scrollbar in emoji picker */
+  .EmojiPickerReact,
+  .EmojiPickerReact * {
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
+  }
+  .EmojiPickerReact *::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+  }
 }

@@ -29,6 +29,58 @@ global.ResizeObserver = class ResizeObserver {
   disconnect() {}
 };
 
+// Mock IntersectionObserver
+global.IntersectionObserver = class IntersectionObserver {
+  root = null;
+  rootMargin = "";
+  thresholds = [];
+  private cb: IntersectionObserverCallback;
+
+  constructor(cb: IntersectionObserverCallback) {
+    this.cb = cb;
+  }
+
+  observe(target: Element) {
+    setTimeout(() => {
+      this.cb(
+        [
+          {
+            isIntersecting: true,
+            target,
+            intersectionRatio: 1,
+            time: Date.now(),
+            boundingClientRect: target.getBoundingClientRect(),
+            intersectionRect: target.getBoundingClientRect(),
+            rootBounds: null,
+          } as IntersectionObserverEntry,
+        ],
+        this as unknown as IntersectionObserver,
+      );
+    }, 0);
+  }
+
+  unobserve() {}
+  disconnect() {}
+  takeRecords() {
+    return [];
+  }
+};
+
+// Polyfill requestAnimationFrame / cancelAnimationFrame for jsdom
+if (typeof window.requestAnimationFrame === "undefined") {
+  window.requestAnimationFrame = ((cb: FrameRequestCallback) =>
+    setTimeout(
+      cb,
+      0,
+    ) as unknown as number) as typeof window.requestAnimationFrame;
+}
+if (typeof window.cancelAnimationFrame === "undefined") {
+  window.cancelAnimationFrame = ((id: number) =>
+    clearTimeout(id)) as typeof window.cancelAnimationFrame;
+}
+globalThis.requestAnimationFrame = window.requestAnimationFrame;
+globalThis.cancelAnimationFrame = window.cancelAnimationFrame;
+
 // Mock navigator.clipboard
 Object.defineProperty(navigator, "clipboard", {
   value: {

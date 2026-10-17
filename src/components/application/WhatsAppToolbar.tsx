@@ -6,6 +6,7 @@ import {
   ClearAllButton,
   ClearFormattingButton,
   CodeButton,
+  EmojiButton,
   ItalicButton,
   NumberedListButton,
   QuoteButton,
@@ -31,6 +32,10 @@ export function WhatsAppToolbar() {
             <BulletListButton />
             <NumberedListButton />
             <QuoteButton />
+
+            <Separator orientation="vertical" className="mx-1" />
+
+            <EmojiButton />
 
             <Separator orientation="vertical" className="mx-1" />
 

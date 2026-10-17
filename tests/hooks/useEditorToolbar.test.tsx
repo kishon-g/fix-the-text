@@ -45,6 +45,7 @@ describe("useEditorToolbar Hook", () => {
     expect(typeof result.current.toggleQuote).toBe("function");
     expect(typeof result.current.clearFormatting).toBe("function");
     expect(typeof result.current.clearAll).toBe("function");
+    expect(typeof result.current.insertEmoji).toBe("function");
   });
 
   it("can execute format commands without throwing", () => {
@@ -61,6 +62,7 @@ describe("useEditorToolbar Hook", () => {
         result.current.toggleQuote();
         result.current.clearFormatting();
         result.current.clearAll();
+        result.current.insertEmoji("😀");
       });
     }).not.toThrow();
   });

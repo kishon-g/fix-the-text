@@ -13,6 +13,7 @@ import {
   $createParagraphNode,
   $getRoot,
   $getSelection,
+  $isParagraphNode,
   $isRangeSelection,
   COMMAND_PRIORITY_CRITICAL,
   FORMAT_TEXT_COMMAND,
@@ -40,6 +41,7 @@ export interface EditorToolbarState {
   toggleQuote: () => void;
   clearFormatting: () => void;
   clearAll: () => void;
+  insertEmoji: (emoji: string) => void;
 }
 
 export function useEditorToolbar(): EditorToolbarState {
@@ -173,6 +175,31 @@ export function useEditorToolbar(): EditorToolbarState {
     });
   }, [editor]);
 
+  const insertEmoji = useCallback(
+    (emoji: string) => {
+      editor.update(() => {
+        const selection = $getSelection();
+        if ($isRangeSelection(selection)) {
+          selection.insertText(emoji);
+        } else {
+          const root = $getRoot();
+          let lastChild = root.getLastChild();
+          if (!lastChild || !$isParagraphNode(lastChild)) {
+            const p = $createParagraphNode();
+            root.append(p);
+            lastChild = p;
+          }
+          lastChild.selectEnd();
+          const newSelection = $getSelection();
+          if ($isRangeSelection(newSelection)) {
+            newSelection.insertText(emoji);
+          }
+        }
+      });
+    },
+    [editor],
+  );
+
   return {
     isBold,
     isItalic,
@@ -190,5 +217,6 @@ export function useEditorToolbar(): EditorToolbarState {
     toggleQuote,
     clearFormatting,
     clearAll,
+    insertEmoji,
   };
 }
